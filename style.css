@@ -1,0 +1,496 @@
+:root {
+    /* Define o tamanho base para o rem */
+    font-size: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    ;
+}
+
+.navbar {
+    background-color: #000;
+    padding: 1rem 5vw;
+    /* Padding responsivo usando rem e vw */
+    display: flex;
+    justify-content: space-between;
+    /* Empurra logo para esquerda e menu para direita */
+    align-items: center;
+    width: 100%;
+    position: sticky;
+    z-index: 1000;
+    top: 0;
+}
+
+.btn-hamburguer {
+    align-items: flex-end;
+    justify-content: left;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+}
+
+/* Estilo da Logo */
+.logo {
+    width: 70px;
+    height: auto;
+}
+
+/* Estilo do Contêiner de Links */
+.menu-links {
+    /* Em telas de celular, os links ficam invisíveis ou transformados em um ícone de hambúrguer. */
+    /* Para simplificar, vamos transformá-los em coluna se necessário: */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* Alinha os links à direita do menu */
+    gap: 0.5rem;
+    /* Espaçamento entre os links em rem */
+}
+
+.menu-links a {
+    font-size: 1rem;
+    /* Tamanho da fonte responsivo */
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-weight: 400;
+    display: none;
+}
+
+.menu-links a:hover {
+    color: #00ff99;
+}
+
+/*Section Nossos produtos*/
+
+#nossosProdutos h1 {
+    margin-top: 3vw;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+/*Segundo Carrocel*/
+
+.container-slide {
+    margin: 0 auto;
+    width: 80vw;
+    height: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+
+.paginas-slide {
+    display: inline-block;
+    animation: anima 30s linear infinite;
+}
+
+.paginas-slide img {
+    margin: 1vw;
+    margin-top: 6vw;
+    width: 30vw;
+    height: 28vw;
+}
+
+/*Animação*/
+@keyframes anima {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/*Botão*/
+.meu-btn .btn {
+    font-size: 1rem;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+.meu-btn .btn {
+    display: flex;
+    margin-top: 4vw;
+    margin-left: auto;
+    font-size: 0.5rem;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2vw;
+    width: auto;
+}
+
+.btn:hover {
+
+    background-color: #156942;
+    border-color: #156942;
+}
+
+/*Section conserto*/
+#conserto img {
+    width: 100%;
+
+}
+
+#conserto .meu-btn .btn {
+    margin-top: -10vw;
+    position: absolute;
+    margin-left: 6vw;
+}
+
+#NossosServiços h2 {
+    margin-top: 3vw;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.containner {
+    display: block;
+}
+
+#NossosServiços img {
+    display: flex;
+    object-fit: cover;
+    /* Garante que a imagem ocupe 100% da largura e altura do seu div pai (que tem o h-64) */
+    width: 70%;
+    height: auto;
+    margin-left: 20vw;
+
+}
+
+.container-texto,
+.container-texto2 h3 {
+    text-align: center;
+    font-size: 1rem;
+
+}
+
+.container-texto p {
+    text-align: justify;
+    padding: 5vw;
+    font-size: 1.2rem;
+}
+
+#NossosServiços .meu-btn .btn {
+    padding: 2vw;
+    font-size: 3vw;
+    margin: 7vw;
+    margin-left: 2vw;
+
+}
+
+/*Section localização*/
+.titulo-loc {
+    display: flex;
+    justify-content: center;
+
+}
+
+#icone {
+    width: 7vw;
+    height: auto;
+    object-fit: cover;
+    margin-left: 1vw;
+    margin-bottom: 2vw;
+}
+
+.container-onde-estamos img {
+    display: flex;
+    object-fit: cover;
+    /* Garante que a imagem ocupe 100% da largura e altura do seu div pai (que tem o h-64) */
+    width: 70%;
+    height: auto;
+    margin-left: 12vw;
+}
+
+.txt-endereco p {
+    text-align: justify;
+    padding: 5vw;
+    font-size: 1.2rem;
+}
+
+footer {
+    background-color: #000;
+    padding: 5vw;
+
+}
+
+.container-footer {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 10vw;
+}
+
+.rodape-img img {
+    display: none;
+
+}
+
+.container-footer h3 {
+    color: #00ff99;
+    font-size: 1.2rem;
+
+}
+
+.container-tel,
+.container-insta {
+    display: flex;
+    gap: 1vw;
+    color: white;
+}
+
+.container-tel svg {
+    color: #00ff99;
+    margin-top: 0.5vw;
+}
+
+.container-insta svg {
+    color: #00ff99;
+    margin-top: 0.5vw;
+}
+
+.localizacao {
+    color: #fff;
+}
+
+#rodape {
+    text-align: center;
+    margin-top: 5vw;
+    margin-bottom: -5vw;
+}
+
+#rodape p,
+a {
+    font-size: 1.2rem;
+    color: white;
+}
+
+#rodape a {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+
+@media (min-width: 810px) {
+    .navbar {
+        padding: 1rem 5rem;
+        /* Aumenta o padding lateral para desktop */
+        position: sticky;
+    }
+
+    .btn-hamburguer {
+        display: none;
+    }
+
+    .menu-links {
+        /* Muda a direção para que os links fiquem LADO A LADO */
+        flex-direction: row;
+        /* Aumenta o espaçamento entre eles */
+        gap: 1.5rem;
+    }
+
+    .menu-links a {
+        display: block;
+        font-size: 1.2rem;
+        /* Aumenta o texto para telas maiores */
+    }
+
+    #nossosProdutos h1 {
+        font-size: 2.2rem;
+        text-align: center;
+    }
+
+    .paginas-slide img {
+        margin: 30px;
+        margin-top: 60px;
+        width: 300px;
+        height: 280px;
+    }
+
+    #nossosProdutos .meu-btn .btn {
+        font-size: 1.3rem;
+
+    }
+
+    #conserto img {
+        width: 100%;
+        margin-bottom: 3vw;
+    }
+
+    #conserto .meu-btn .btn {
+        margin-top: -16vw;
+        position: absolute;
+        margin-left: 7vw;
+        font-size: 1.2rem;
+    }
+
+    #containner-principal {
+        justify-content: center;
+        padding: 5vw;
+    }
+
+    #NossosServiços h2 {
+        font-size: 2.5rem;
+        font-weight: 300;
+    }
+
+    .containner1 {
+        display: flex;
+    }
+
+    #NossosServiços img {
+        display: flex;
+        object-fit: cover;
+        /* Garante que a imagem ocupe 100% da largura e altura do seu div pai (que tem o h-64) */
+        width: 30vw;
+        height: auto;
+        margin-left: 10vw;
+
+    }
+
+    .container-texto h3 {
+        margin-top: 2vw;
+        text-align: left;
+        font-size: 1.7rem;
+        padding-left: 1vw;
+    }
+
+    .container-texto p {
+        text-align: justify;
+        padding: 1vw;
+        font-size: 1.5rem;
+
+    }
+
+    .container-texto {
+        width: 40vw;
+        margin-left: 1vw;
+        margin-top: 6vw;
+        padding: 2vw;
+    }
+
+    .containner2 {
+        display: flex;
+    }
+
+    .containner2 .container-img2 {
+        margin-right: 10vw;
+    }
+
+    #NossosServiços .meu-btn .btn {
+        margin-left: 9vw;
+        font-size: 1.2rem;
+        padding: 0.6vw;
+        margin-top: -1vw;
+    }
+
+    #icone {
+        width: 5vw;
+        object-fit: cover;
+        margin-top: -1vw;
+
+    }
+
+    .container-onde-estamos img {
+        display: flex;
+        object-fit: cover;
+        /* Garante que a imagem ocupe 100% da largura e altura do seu div pai (que tem o h-64) */
+        width: 35vw;
+        height: 17vw;
+        margin-top: 2vw;
+    }
+
+    .container-onde-estamos {
+        display: flex;
+        padding: 5vw;
+        margin-top: -6vw;
+    }
+
+    .container-onde-estamos p {
+        font-size: 1.6rem;
+        line-height: 2;
+        font-weight: 540;
+        margin-top: -3vw;
+    }
+
+    .rodape-img img {
+        display: flex;
+        width: 12vw;
+
+
+    }
+
+    .container-footer h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .container-footer p {
+        font-size: 1.5rem;
+        font-weight: 300;
+    }
+
+    .container-footer {
+        display: flex;
+        margin-top: -3vw;
+        margin-bottom: -3vw;
+    }
+
+    .contatos {
+        margin-left: 5vw;
+        font-size: 1.2rem;
+    }
+
+    .localizacao {
+        margin-left: 5vw;
+        font-size: 1.2rem;
+    }
+
+    .container-tel svg {
+        width: 1.5vw;
+        height: 1.5vw;
+        margin-bottom: 0.5vw;
+    }
+
+    .container-insta svg {
+        width: 1.5vw;
+        height: 1.5vw;
+        margin-bottom: 0.5vw;
+
+    }
+
+    .container-tel {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 1vw;
+    }
+
+    /* Opcional: Remove a margem padrão do parágrafo, que pode atrapalhar o alinhamento */
+    .container-tel p {
+        margin: 0;
+    }
+
+    .container-insta {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+    }
+
+    .container-insta p {
+        margin: 0;
+    }
+    
+    footer a:hover{
+        color: #00ff99;
+    }
+}
