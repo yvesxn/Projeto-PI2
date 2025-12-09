@@ -479,6 +479,15 @@ a {
         margin: 0;
     }
 
+    .container-tel a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .container-tel a:hover {
+        color: #00ff99;
+    }
+
     .container-insta {
         display: flex;
         align-items: center;
@@ -489,8 +498,14 @@ a {
     .container-insta p {
         margin: 0;
     }
+
+    .container-insta a{
+        text-decoration: none;
+        color: #fff;
+    }
     
-    footer a:hover{
+    .container-insta a:hover{
         color: #00ff99;
     }
+
 }
