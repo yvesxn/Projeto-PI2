@@ -395,10 +395,10 @@ a {
         height: 360px;
     }
 
-    .produto-card button{
+    .produto-card button {
         margin-top: auto;
         width: 80%;
-        padding:10px;
+        padding: 10px;
     }
 
     .produto-card img {
@@ -412,6 +412,32 @@ a {
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     }
 
+    .pag-altern {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .pag-altern button, input {
+        width: 20px;
+        border: none;
+        background-color: #fff;
+        display: flex;
+        flex-direction: row;
+        margin-right: 20px;
+        justify-content: center;
+        text-align: center;
+    }
+    .pag-altern .anterior, .proximo {
+        width: 70px ;
+    }
+        .pag-altern .proximo {
+        width: 70px ;
+    }
+
+    .pag-altern button:focus{
+        background-color: #07cd71;
+
+    }
 
     .rodape-img img {
         display: flex;
@@ -492,13 +518,13 @@ a {
         font-size: 1.3rem;
     }
 
-    .container-insta a{
+    .container-insta a {
         text-decoration: none;
         color: #fff;
         font-size: 1.3rem;
     }
-    
-    .container-insta a:hover{
+
+    .container-insta a:hover {
         color: #00ff99;
     }
 
