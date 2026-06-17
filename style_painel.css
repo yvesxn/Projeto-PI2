@@ -1,0 +1,137 @@
+:root {
+    --bg-body: #0d0d0d;
+    --bg-sidebar: #141414;
+    --bg-card: #1a1a1a;
+    --primary-green: #2ecc71;
+    --text-white: #ffffff;
+    --text-gray: #7a7a7a;
+    --input-bg: #222222;
+    --border: #222222;
+    --danger: #e74c3c;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+body { background-color: var(--bg-body); color: var(--text-white); height: 100vh; overflow: hidden; }
+
+.dashboard { display: flex; height: 100%; }
+
+/* SIDEBAR */
+.sidebar { width: 280px; background-color: var(--bg-sidebar); border-right: 1px solid var(--border); }
+.sidebar-header { padding: 30px 20px; display: flex; align-items: center; gap: 12px; }
+.icon-box-admin { background-color: var(--primary-green); width: 38px; height: 38px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.header-text h3 { font-size: 17px; font-weight: 600; }
+.header-text p { font-size: 12px; color: var(--text-gray); }
+
+.menu { padding: 20px 15px; }
+.menu-item { padding: 12px 15px; border-radius: 8px; color: var(--text-gray); cursor: pointer; margin-bottom: 5px; display: flex; align-items: center; gap: 12px; font-size: 14px; transition: 0.2s; }
+.menu-item.active { background-color: rgba(46, 204, 113, 0.08); color: var(--primary-green); }
+
+/* CONTEÚDO */
+.content { flex: 1; padding: 60px 80px; overflow-y: auto; }
+.hidden { display: none !important; }
+.content-title h1 { font-size: 30px; margin-bottom: 5px; }
+.content-title p { color: var(--text-gray); margin-bottom: 40px; }
+
+/* FORMULÁRIO */
+.cadastro-form { max-width: 600px; display: flex; flex-direction: column; gap: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group label { font-size: 14px; font-weight: 500; }
+
+/* AJUSTE NA CAIXA DE UPLOAD */
+.image-upload-box {
+    position: relative; /* Para a imagem grudar aqui dentro */
+    width: 250px; 
+    height: 220px; 
+    background-color: var(--bg-card);
+    border-radius: 15px; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    border: 2px dashed #333; /* Borda pontilhada mais visível */
+    color: var(--text-gray);
+    cursor: pointer;
+    overflow: hidden; /* Garante que a foto não vaze as bordas arredondadas */
+    transition: 0.3s;
+}
+
+.image-upload-box:hover {
+    border-color: var(--primary-green);
+    background-color: #1f1f1f;
+}
+
+/* ESTILO DA IMAGEM DENTRO DA CAIXA */
+#preview-img {
+    position: absolute; /* Sobrepõe o ícone e o texto */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Preenche sem distorcer */
+    display: none; /* Só aparece quando o JS mandar */
+    z-index: 5;
+}
+
+/* Quando a classe .has-image for adicionada, escondemos o ícone e texto */
+.image-upload-box.has-image .upload-content {
+    display: none;
+}
+
+input, textarea { background-color: var(--input-bg); border: 1px solid #2a2a2a; padding: 15px; border-radius: 8px; color: white; outline: none; }
+textarea { height: 100px; resize: none; }
+
+.btn-submit { background-color: var(--primary-green); color: white; border: none; padding: 18px; border-radius: 10px; font-weight: 600; cursor: pointer; margin-top: 10px; }
+
+/* CARD DE PRODUTO (LISTAGEM) */
+.product-card {
+    background-color: var(--bg-card); padding: 30px; border-radius: 20px;
+    display: flex; align-items: center; gap: 25px; width: 100%;
+    max-width: 900px; border: 1px solid #222; margin-bottom: 20px;
+    position: relative; animation: fadeIn 0.3s ease;
+}
+
+.product-img-box { 
+    width: 100px; 
+    height: 100px; 
+    background-color: #222; 
+    border-radius: 12px; 
+    flex-shrink: 0; 
+    overflow: hidden; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info h2 { font-size: 20px; margin-bottom: 4px; }
+.info .desc { color: var(--text-gray); font-size: 14px; margin-bottom: 8px; }
+.info .price { color: var(--primary-green); font-weight: 600; }
+
+.btn-delete {
+    background: rgba(231, 76, 60, 0.1); color: var(--danger);
+    border: 1px solid rgba(231, 76, 60, 0.2); padding: 8px 12px;
+    border-radius: 6px; cursor: pointer; transition: 0.2s;
+}
+
+.btn-delete:hover { background: rgba(231, 76, 60, 0.25); }
+
+.btn-edit {
+    background: rgba(46, 204, 113, 0.1); color: var(--primary-green);
+    border: 1px solid rgba(46, 204, 113, 0.2); padding: 8px 12px;
+    border-radius: 6px; cursor: pointer; transition: 0.2s;
+}
+
+.btn-edit:hover { background: rgba(46, 204, 113, 0.25); }
+
+.card-actions {
+    position: absolute; top: 20px; right: 20px;
+    display: flex; gap: 8px;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

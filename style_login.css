@@ -1,0 +1,203 @@
+// ==========================================
+// 1. MAPEAMENTO DE ELEMENTOS
+// ==========================================
+const menuProdutos = document.getElementById('menu-produtos');
+const menuAdicionar = document.getElementById('menu-adicionar');
+const viewList = document.getElementById('view-list');
+const viewForm = document.getElementById('view-form');
+const btnSave = document.getElementById('save-product');
+const container = document.getElementById('products-container');
+const statusText = document.getElementById('status-text');
+
+let indiceEditando = -1; // -1 = novo produto, >= 0 = editando
+
+const inputFoto = document.getElementById('input-foto');
+const previewImg = document.getElementById('preview-img');
+const textoUpload = document.getElementById('texto-upload');
+const areaUpload = document.getElementById('area-upload');
+const inputPreco = document.getElementById('preco-prod');
+
+let fotoBase64 = "";
+
+// ==========================================
+// 2. BANCO DE DADOS (LOCALSTORAGE)
+// ==========================================
+let listaProdutos = JSON.parse(localStorage.getItem('meusProdutos')) || [];
+
+// ==========================================
+// 3. MÁSCARA DE DINHEIRO (R$ 0,00)
+// ==========================================
+inputPreco.addEventListener('input', (e) => {
+    let v = e.target.value.replace(/\D/g, ""); // Remove letras
+    v = (v / 100).toFixed(2) + ""; // Transforma em decimal
+    v = v.replace(".", ","); // Troca ponto por vírgula
+    v = v.replace(/(\d)(\d{3}),/g, "$1.$2,"); // Coloca ponto de milhar (ex: 1.000,00)
+    e.target.value = v;
+});
+
+// ==========================================
+// 4. LÓGICA DA FOTO (PREVIEW NO QUADRADO)
+// ==========================================
+inputFoto.onchange = (event) => {
+    const arquivo = event.target.files[0];
+    if (arquivo) {
+        const leitor = new FileReader();
+        leitor.onload = () => {
+            fotoBase64 = leitor.result;
+            previewImg.src = fotoBase64;
+            previewImg.style.display = "block";
+            areaUpload.classList.add('has-image'); // Esconde o texto/ícone
+        };
+        leitor.readAsDataURL(arquivo);
+    }
+};
+
+// ==========================================
+// 5. NAVEGAÇÃO
+// ==========================================
+menuProdutos.onclick = () => {
+    viewList.classList.remove('hidden');
+    viewForm.classList.add('hidden');
+    menuProdutos.classList.add('active');
+    menuAdicionar.classList.remove('active');
+    renderizarProdutos();
+};
+
+menuAdicionar.onclick = () => {
+    viewForm.classList.remove('hidden');
+    viewList.classList.add('hidden');
+    menuAdicionar.classList.add('active');
+    menuProdutos.classList.remove('active');
+};
+
+// ==========================================
+// 6. RENDERIZAÇÃO DOS CARDS
+// ==========================================
+const renderizarProdutos = () => {
+    container.innerHTML = "";
+    if (listaProdutos.length === 0) {
+        statusText.innerText = "Nenhum produto cadastrado";
+        return;
+    }
+    statusText.innerText = "Produtos cadastrados";
+
+    listaProdutos.forEach((prod, index) => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+
+        const imagemHTML = prod.foto
+            ? `<img src="${prod.foto}" alt="${prod.nome}">`
+            : `<span class="img-placeholder">📦</span>`;
+
+        card.innerHTML = `
+            <div class="product-img-box">
+                ${imagemHTML}
+            </div>
+            <div class="info">
+                <h2>${prod.nome}</h2>
+                <p class="desc">${prod.desc || "Sem descrição"}</p>
+                <p class="price">R$ ${prod.preco}</p>
+            </div>
+            <div class="card-actions">
+                <button class="btn-edit" onclick="editarProduto(${index})">✏️ Editar</button>
+                <button class="btn-delete" onclick="excluirProduto(${index})">🗑️ Excluir</button>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+};
+
+// ==========================================
+// 7. SALVAR PRODUTO
+// ==========================================
+btnSave.onclick = () => {
+    const nome = document.getElementById('nome-prod').value;
+    const desc = document.getElementById('desc-prod').value;
+    const preco = document.getElementById('preco-prod').value;
+
+    try {
+        if (!nome || !preco || preco === "0,00") throw new Error("Preencha o nome e o preço!");
+
+        const produto = {
+            nome: nome,
+            desc: desc,
+            preco: preco,
+            foto: fotoBase64 || (indiceEditando >= 0 ? listaProdutos[indiceEditando].foto : "")
+        };
+
+        if (indiceEditando >= 0) {
+            // MODO EDIÇÃO: substitui o produto existente
+            listaProdutos[indiceEditando] = produto;
+            indiceEditando = -1;
+            document.getElementById('form-titulo').innerText = "Novo Produto";
+            btnSave.innerText = "Cadastrar produto";
+        } else {
+            // MODO NOVO: adiciona ao final
+            listaProdutos.push(produto);
+        }
+
+        localStorage.setItem('meusProdutos', JSON.stringify(listaProdutos));
+
+        // RESETAR FORMULÁRIO
+        document.getElementById('cadastro-form').reset();
+        previewImg.style.display = "none";
+        previewImg.src = "";
+        fotoBase64 = "";
+        areaUpload.classList.remove('has-image');
+
+        alert(indiceEditando === -1 ? "Produto atualizado com sucesso!" : "Produto cadastrado com sucesso!");
+        menuProdutos.click();
+
+    } catch (e) {
+        alert(e.message);
+    }
+};
+
+// ==========================================
+// 8. EXCLUIR PRODUTO
+// ==========================================
+window.excluirProduto = (index) => {
+    if (confirm("Deseja realmente excluir este produto?")) {
+        listaProdutos.splice(index, 1);
+        localStorage.setItem('meusProdutos', JSON.stringify(listaProdutos));
+        renderizarProdutos();
+    }
+};
+
+// ==========================================
+// 9. EDITAR PRODUTO
+// ==========================================
+window.editarProduto = (index) => {
+    const prod = listaProdutos[index];
+    indiceEditando = index;
+
+    // Preenche os campos com os dados do produto
+    document.getElementById('nome-prod').value = prod.nome;
+    document.getElementById('desc-prod').value = prod.desc || "";
+    document.getElementById('preco-prod').value = prod.preco;
+
+    // Carrega a imagem atual na prévia
+    if (prod.foto) {
+        fotoBase64 = prod.foto;
+        previewImg.src = prod.foto;
+        previewImg.style.display = "block";
+        areaUpload.classList.add('has-image');
+    } else {
+        fotoBase64 = "";
+        previewImg.src = "";
+        previewImg.style.display = "none";
+        areaUpload.classList.remove('has-image');
+    }
+
+    // Atualiza título e botão do formulário
+    document.getElementById('form-titulo').innerText = "Editar Produto";
+    btnSave.innerText = "Salvar alterações";
+
+    // Navega para o formulário
+    viewForm.classList.remove('hidden');
+    viewList.classList.add('hidden');
+    menuAdicionar.classList.add('active');
+    menuProdutos.classList.remove('active');
+};
+
+renderizarProdutos();

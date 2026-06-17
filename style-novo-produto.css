@@ -1,0 +1,36 @@
+// 1. Selecionamos o formulário pela classe que está no seu HTML
+const loginForm = document.querySelector('.login-card');
+
+// 2. Criamos a função que roda quando clicar no botão "Entrar"
+loginForm.onsubmit = (event) => {
+    event.preventDefault(); // Impede a página de recarregar
+
+    // 3. Pegamos os valores dentro dos inputs
+    const email = loginForm.querySelector('input[type="email"]').value;
+    const senha = loginForm.querySelector('input[type="password"]').value;
+
+    // Usamos o try/catch para lidar com o login de forma limpa
+    try {
+        // DEFINIMOS O LOGIN PADRÃO AQUI
+        const emailCorreto = "admin@ffimports.com";
+        const senhaCorreta = "123456";
+
+        if (email === emailCorreto && senha === senhaCorreta) {
+            // Se der certo:
+            alert("Login realizado com sucesso!");
+            
+            // Guardamos que o usuário está logado nesta sessão
+            sessionStorage.setItem('logado', 'true');
+
+            // Redireciona para a página do painel
+            window.location.href = "painel-novo-produto.html";
+        } else {
+            // Se der errado, lançamos um erro para o catch pegar
+            throw new Error("E-mail ou senha incorretos.");
+        }
+
+    } catch (error) {
+        // Exibe a mensagem de erro que definimos no throw
+        alert(error.message);
+    }
+};

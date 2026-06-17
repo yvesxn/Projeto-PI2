@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - F&F Imports</title>
+    <link rel="stylesheet" href="style-novo-produto.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .hidden { display: none !important; }
+        
+        /* Ajuste na caixa de upload para conter a imagem */
+        .image-upload-box { 
+            position: relative; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            border: 2px dashed #444; 
+            text-align: center; 
+            border-radius: 15px; 
+            width: 250px; 
+            height: 220px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden; /* Corta a imagem nas bordas arredondadas */
+            background-color: #1a1a1a;
+        }
+
+        /* A imagem de prévia agora preenche o quadrado todo */
+        #preview-img { 
+            position: absolute;
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            display: none; 
+            z-index: 1;
+        }
+
+        /* Esconde o ícone e texto quando houver imagem */
+        .image-upload-box.has-image .upload-content { display: none; }
+        
+        .image-upload-box:hover { border-color: #2ecc71; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="icon-box-admin">
+                    <span class="grid-icon">⊞</span>
+                </div>
+                <div class="header-text">
+                    <h3>Admin</h3>
+                    <p>Gerenciar produtos</p>
+                </div>
+            </div>
+
+            <nav class="menu">
+                <div class="menu-item active" id="menu-produtos">
+                    <span class="icon">📦</span> Produtos
+                </div>
+                <div class="menu-item" id="menu-adicionar">
+                    <span class="icon">＋</span> Adicionar
+                </div>
+            </nav>
+        </aside>
+
+        <main class="content">
+            
+            <section id="view-list">
+                <header class="content-title">
+                    <h1>Produtos</h1>
+                    <p id="status-text">Nenhum produto cadastrado</p>
+                </header>
+                <div id="products-container" class="products-list"></div>
+            </section>
+
+            <section id="view-form" class="hidden">
+                <header class="content-title">
+                    <h1 id="form-titulo">Novo Produto</h1>
+                    <p>Preencha as informações e adicione a imagem do item</p>
+                </header>
+
+                <form id="cadastro-form" class="cadastro-form">
+                    <div class="form-group">
+                        <label>Imagem do Produto</label>
+                        <label for="input-foto" class="image-upload-box" id="area-upload">
+                            <img id="preview-img" src="" alt="Prévia">
+                            
+                            <div class="upload-content" id="upload-content">
+                                <span class="upload-icon">🖼️</span>
+                                <p id="texto-upload">Clique para selecionar uma foto</p>
+                            </div>
+                            
+                            <input type="file" id="input-foto" accept="image/*" hidden>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nome do Produto</label>
+                        <input type="text" id="nome-prod" placeholder="Ex: Iphone 15 plus">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea id="desc-prod" placeholder="Descreva o produto em detalhes..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preço (R$)</label>
+                        <input type="text" id="preco-prod" placeholder="0,00">
+                    </div>
+
+                    <button type="button" class="btn-submit" id="save-product">Cadastrar produto</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="script-novo-produto.js"></script>
+</body>
+</html>
